@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>Painel Centro Cirurgico</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+
+    <script>
+        lsUser = []
+        function save() {
+            const xhttp = new XMLHttpRequest();
+            id = document.getElementById("id").value;
+            name = document.getElementById("name").value;
+            status = document.getElementById("status").value;
+            location = document.getElementById("location").value;
+            proposedTime = document.getElementById("proposedTime").value;
+            actualStartTime = document.getElementById("actualStartTime").value;
+            endTime = document.getElementById("endTime").value;
+            exitTime = document.getElementById("exitTime").value;
+
+            if (id > 0) {
+                xhttp.open("PUT", `/user/${id}?name=${name}
+                                              &status=${status}
+                                              &location=${location}
+                                              &proposedTime=${proposedTime}
+                                              &actualStartTime=${actualStartTime}
+                                              &endTime=${endTime}
+                                              &exitTime=${exitTime}`);
+            } else {
+                xhttp.open("POST", `/user/?name=${name}
+                                          &status=${status}
+                                          &location=${location}
+                                          &proposedTime=${proposedTime}
+                                          &actualStartTime=${actualStartTime}
+                                          &endTime=${endTime}
+                                          &exitTime=${exitTime}`);
+            }
+
+            xhttp.send();
+            xhttp.onload = function () {
+                alert(this.responseText);
+                listAllUser();
+                clearForm();
+            }
+        }
+        function listAllUser() {
+
+            const xhttp = new XMLHttpRequest();
+            xhttp.open("GET", `/user/`);
+            xhttp.send();
+            xhttp.onload = function () {
+                lsUser = JSON.parse(this.responseText);
+                out = "";
+                for (const i in lsUser) {
+                    console.log(lsUser[i])
+                    u = lsUser[i]
+                    out += `<tr onclick='activate(${i})'><td>${u.name}</td>
+                                                         <td>${u.status}</td>
+                                                         <td>${u.location}</td>
+                                                         <td>${u.proposedTime}</td>
+                                                         <td>${u.actualStartTime}</td>
+                                                         <td>${u.endTime}</td>
+                                                         <td>${u.exitTime}</td>
+                            </tr>`;
+                }
+                document.getElementById("tbody").innerHTML = out;
+            }
+        }
+        function activate(id) {
+            u = lsUser[id]
+            document.getElementById("id").value = u.id;
+            document.getElementById("name").value = u.name;
+            document.getElementById("status").value = u.status;
+            document.getElementById("location").value = u.location;
+            document.getElementById("proposedTime").value = u.proposedTime;
+            document.getElementById("actualStartTime").value = u.actualStartTime;
+            document.getElementById("endTime").value = u.endTime;
+            document.getElementById("exitTime").value = u.exitTime;
+        }
+        function clearForm() {
+            document.getElementById("id").value = "";
+            document.getElementById("name").value = ""; 
+            document.getElementById("status").value = "";
+            document.getElementById("location").value = ""; 
+            document.getElementById("proposedTime").value = "";
+            document.getElementById("actualStartTime").value = ""; 
+            document.getElementById("endTime").value = "";
+            document.getElementById("exitTime").value = "";
+        }
+        function deleteUser() {
+            const xhttp = new XMLHttpRequest();
+            id = document.getElementById("id").value;
+            xhttp.open("DELETE", `/user/${id}`);
+            xhttp.send();
+            xhttp.onload = function () {
+                alert(this.responseText);
+                listAllUser();
+                clearForm();
+            }
+        }
+    </script>
+
+    <div class="container mt-3">
+            <div class="row">
+               <!-- <div class="col">
+                    <img src="Bandeira_do_Distrito_Federal_Brasil.png" alt="HRT Logo" height = "100px">
+                </div>-->
+                <div>
+                    <h2 class="col mt-1">Painel Centro Cirurgico - Hospital HRT<samp id="view"></samp></h2>
+                </div>
+            </div>   
+
+                <form>
+            
+            <div class="row mb-3 mt-3">
+
+                    <div class="col">
+                        <input type="hidden" id="id" name="id">
+                    <label for="name">Nome:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Enter name" name="name">
+    
+                    </div>
+                    
+                    <div class = "col">
+                        <label for="status" class="form-control" aria-placeholder="Select Status">Status:</label>
+                        <select class="form-select" id="status" name="status">
+                            <option value="operatorio">Pré Operatório</option>
+                            <option value="sala-cirurgia">Em sala de Cirurgia</option>
+                            <option value="recuperacao">Sala de Recuperação</option>
+                            <option value="transferido">Trensferído</option>
+                        </select>
+                    </div>
+
+                    <div class = "col">
+                        <label for="location" class="form-control">Local:</label>
+                        <select class="form-select" id="location" placeholder="Location" name="location">
+                          <option>Sala</option>
+                          <option>Quarto</option>
+                          <option>Atendimento</option>
+                         
+                        </select>
+
+                     </div>
+
+
+                     <div class = "row p-3">
+                        <div class = "col">
+                            <label for="proposedTime">Início Previsto: </label>
+                            <input type="time" class="form-control" id="proposedTime" name="proposedTime">
+                        </div>
+                        <div class = "col">
+                            <label for="actualStartTime">Início Cirurgia: </label>
+                            <input type="time" class="form-control" id="actualStartTime" name="actualStartTime">
+                        </div>
+                        <div class = "col">
+                            <label for="endTime">Fim da Cirurgia: </label>
+                            <input type="time" class="form-control" id="endTime" name="endTime">
+                        </div>
+                        <div class = "col">
+                            <label for="endTime">Saída da Cirurgia: </label>
+                            <input type="time" class="form-control" id="exitTime" name="exitTime">
+                        </div>
+                    </div>
+
+                    <div>
+                        <button type="button" class="btn btn-primary" onclick="save()">Save</button>
+                        <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
+                        <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete</button>
+                    </div>
+
+            </div>
+            
+        </form>
+    </div>
+    <div class="container mt-3">
+        <table class="table table-hover" style="cursor: pointer;">
+            <thead class="table-success">
+                <tr>
+                    <th width= "39%">Nome do Paciente</th>
+                    <th width= "20%">Status</th>
+                    <th width= "20%">Local</th>
+                    <th width= "10%">Início Previsto</th>
+                    <th width= "10%">Início Cirurgia</th>
+                    <th width= "10%">Fim da Cirurgia</th>
+                    <th width= "10%">Saída da Cirurgia</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+        </table>
+    </div>
+    <script>listAllUser();</script>
+</body>
+
+</html>

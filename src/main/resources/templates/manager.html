@@ -19,8 +19,8 @@
             id = document.getElementById("id").value;
             name = document.getElementById("name").value;
             status = document.getElementById("status").value;
-            /*location = document.getElementById("location").value;
-            proposedTime = document.getElementById("proposedTime").value;
+            location = document.getElementById("location").value;
+            /*proposedTime = document.getElementById("proposedTime").value;
             actualStartTime = document.getElementById("actualStartTime").value;
             endTime = document.getElementById("endTime").value;
             exitTime = document.getElementById("exitTime").value;*/
@@ -28,7 +28,7 @@
             if (id > 0) {
                 xhttp.open("PUT", `/user/${id}?name=${name}&status=${status}&location=${location}`);
             } else {
-                xhttp.open("POST", `/user/?name=${name} &status=${status}&location=${location}`);
+                xhttp.open("POST", `/user/?name=${name}&status=${status}&location=${location}`);
             }
 
             xhttp.send();
@@ -66,8 +66,8 @@
             document.getElementById("id").value = u.id;
             document.getElementById("name").value = u.name;
             document.getElementById("status").value = u.status;
-            /*document.getElementById("location").value = u.location;
-            document.getElementById("proposedTime").value = u.proposedTime;
+            document.getElementById("location").value = u.location;
+            /*document.getElementById("proposedTime").value = u.proposedTime;
             document.getElementById("actualStartTime").value = u.actualStartTime;
             document.getElementById("endTime").value = u.endTime;
             document.getElementById("exitTime").value = u.exitTime;*/
@@ -76,8 +76,8 @@
             document.getElementById("id").value = "";
             document.getElementById("name").value = ""; 
             document.getElementById("status").value = "";
-            /*document.getElementById("location").value = ""; 
-            document.getElementById("proposedTime").value = "";
+            document.getElementById("location").value = ""; 
+            /*document.getElementById("proposedTime").value = "";
             document.getElementById("actualStartTime").value = ""; 
             document.getElementById("endTime").value = "";
             document.getElementById("exitTime").value = "";*/
@@ -126,15 +126,13 @@
                         </select>
                     </div>
 
-                    <div class = "col">
-                        <label for="location" >Local:</label>
-                        <select class="form-select" id="location" name="location">
-                          <option>Sala</option>
-                          <option>Quarto</option>
-                         
-                        </select>
-                      
-                     </div>
+                         <div class = "col">
+                                 <label for="location" >Local:</label>
+                                 <select class="form-select" id="location" name="location">
+                                 <option>Sala</option>
+                                 <option>Quarto</option>
+                                </select>
+                          </div>
 
 
                      <div class = "row p-3">

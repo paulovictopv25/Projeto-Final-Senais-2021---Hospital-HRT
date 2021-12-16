@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+
+<head>
+    <title>List</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" value="Sign Out" />
+    </form>
+
+    <p>
+		<img
+			src="Logo.png"
+			height="100px">
+	<!--	<script>
+			var myVar = setInterval(myTimer, 1000);
+			function myTimer() {
+				var d = new Date();
+				document.getElementById("refresh-timer").innerHTML = d.getDate()+'/'+(d.getMonth()+1)+'/'+d.getFullYear()+' '+ d
+						.toLocaleTimeString();
+				var tabela = localStorage.getItem('tbody');
+				document.getElementById("tbody").innerHTML = tabela;
+			}
+			documento.myTimer();
+		</script>
+		Regional Hospital Taguatinga | Secretaria de Estado de Saúde do
+		Distrito Federal | Pacients At The Surgical Center - <span id="refresh-timer"></span>
+	</p>-->
+
+
+</div>
+<div class="container mt-3">
+    <table class="table table-hover" style="cursor: pointer;">
+        <thead class="table-success">
+            <tr>
+                <th width= "40%"   >Name</th>
+                <th width= "30%" >Status</th>
+                <th width= "30%" >Location</th>
+                <th width= "20%" >Proposed Start Time</th>
+                <th width= "20%">Actual Start Time</th>
+                <th width= "20%">Surgery End Time</th>
+                <th width= "20%">Exit Time</th>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+
+        </tbody>
+    </table>
+</div>
+<script>listAllUser();</script>
+</body>
+</html>

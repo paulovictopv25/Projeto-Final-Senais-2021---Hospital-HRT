@@ -4,8 +4,7 @@
         <title>Painel Centro Cirurgico</title>
     </head>
     <body>
-        <h1>Welcome!</h1>
-        
-        <p>Click <a th:href="@{/hello}">here</a> to see a greeting.</p>
+        <h1 th:inline="text">Seja Bem Vindo, [[${#httpServletRequest.remoteUser}]]!</h1>
+        <p>Clique <a th:href="@{/manager}">aqui</a> para acessar a página inicial.</p>
     </body>
 </html>

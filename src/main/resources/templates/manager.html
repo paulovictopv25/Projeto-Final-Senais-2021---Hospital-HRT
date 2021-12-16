@@ -9,7 +9,7 @@
 
 <body>
     <form th:action="@{/logout}" method="post">
-        <input type="submit" value="Sign Out" />
+        <input type="submit" value="Sair" />
     </form>
 
     <script>
@@ -19,28 +19,16 @@
             id = document.getElementById("id").value;
             name = document.getElementById("name").value;
             status = document.getElementById("status").value;
-            location = document.getElementById("location").value;
+            /*location = document.getElementById("location").value;
             proposedTime = document.getElementById("proposedTime").value;
             actualStartTime = document.getElementById("actualStartTime").value;
             endTime = document.getElementById("endTime").value;
-            exitTime = document.getElementById("exitTime").value;
+            exitTime = document.getElementById("exitTime").value;*/
 
             if (id > 0) {
-                xhttp.open("PUT", `/user/${id}?name=${name}
-                                              &status=${status}
-                                              &location=${location}
-                                              &proposedTime=${proposedTime}
-                                              &actualStartTime=${actualStartTime}
-                                              &endTime=${endTime}
-                                              &exitTime=${exitTime}`);
+                xhttp.open("PUT", `/user/${id}?name=${name}&status=${status}&location=${location}`);
             } else {
-                xhttp.open("POST", `/user/?name=${name}
-                                          &status=${status}
-                                          &location=${location}
-                                          &proposedTime=${proposedTime}
-                                          &actualStartTime=${actualStartTime}
-                                          &endTime=${endTime}
-                                          &exitTime=${exitTime}`);
+                xhttp.open("POST", `/user/?name=${name} &status=${status}&location=${location}`);
             }
 
             xhttp.send();
@@ -78,21 +66,21 @@
             document.getElementById("id").value = u.id;
             document.getElementById("name").value = u.name;
             document.getElementById("status").value = u.status;
-            document.getElementById("location").value = u.location;
+            /*document.getElementById("location").value = u.location;
             document.getElementById("proposedTime").value = u.proposedTime;
             document.getElementById("actualStartTime").value = u.actualStartTime;
             document.getElementById("endTime").value = u.endTime;
-            document.getElementById("exitTime").value = u.exitTime;
+            document.getElementById("exitTime").value = u.exitTime;*/
         }
         function clearForm() {
             document.getElementById("id").value = "";
             document.getElementById("name").value = ""; 
             document.getElementById("status").value = "";
-            document.getElementById("location").value = ""; 
+            /*document.getElementById("location").value = ""; 
             document.getElementById("proposedTime").value = "";
             document.getElementById("actualStartTime").value = ""; 
             document.getElementById("endTime").value = "";
-            document.getElementById("exitTime").value = "";
+            document.getElementById("exitTime").value = "";*/
         }
         function deleteUser() {
             const xhttp = new XMLHttpRequest();
@@ -129,7 +117,7 @@
                     </div>
                     
                     <div class = "col">
-                        <label for="status" class="form-control" aria-placeholder="Select Status">Status:</label>
+                        <label for="status" >Status:</label>
                         <select class="form-select" id="status" name="status">
                             <option value="operatorio">Pré Operatório</option>
                             <option value="sala-cirurgia">Em sala de Cirurgia</option>
@@ -139,14 +127,13 @@
                     </div>
 
                     <div class = "col">
-                        <label for="location" class="form-control">Local:</label>
-                        <select class="form-select" id="location" placeholder="Location" name="location">
+                        <label for="location" >Local:</label>
+                        <select class="form-select" id="location" name="location">
                           <option>Sala</option>
                           <option>Quarto</option>
-                          <option>Atendimento</option>
                          
                         </select>
-
+                      
                      </div>
 
 

@@ -16,7 +16,7 @@
            <form class="form" th:action="@{/login}" method="post">
                       <div class="card">
                         <div class="card-top">
-                          <img class="imglogin" src="img/governobrasilia.png" alt="100"width="300" height="100" >
+                          <img class="imglogin" src="img/governobrasilia.jpg" alt="" width="200" height="100" >
                                <h2 class="title">Hospital HRT</h2>
                                
                                 <p><h2>Login</h2></p>
@@ -37,6 +37,7 @@
                                 <input type="password" name="password" placeholder="Digite sua Senha" required> 
                           </div>
 
+                                              <div class="valid">
                                               <div th:if="${param.logout}">
                                                 Você foi desconectado.
                                                </div>

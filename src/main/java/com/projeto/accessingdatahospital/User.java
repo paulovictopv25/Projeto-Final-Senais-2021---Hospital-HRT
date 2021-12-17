@@ -15,8 +15,7 @@ public class User {
     private Integer id;
     private String name;
     private String status;
-    private String location;
-    
+    private String local;
     public Integer getId() {
         return id;
     }
@@ -35,11 +34,11 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getLocation() {
-        return location;
+    public String getLocal() {
+        return local;
     }
-    public void setLocation(String location) {
-        this.location = location;
+    public void setLocal(String local) {
+        this.local = local;
     }
-   
+  
 }

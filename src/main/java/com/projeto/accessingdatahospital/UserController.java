@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 @Controller 
 @RequestMapping(path = "/user") 
 @CrossOrigin(origins = "*")
@@ -20,11 +21,11 @@ public class UserController {
     private UserRepository userRepository;
 
     @PostMapping(path = "/") // Map ONLY POST Requests
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String status, @RequestParam String location) {
+    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String status, @RequestParam String local) {
         User n = new User();
         n.setName(name);
         n.setStatus(status);
-        n.setLocation(location);
+        n.setLocal(local);
 
         userRepository.save(n);
         return "Gravado Ok";
@@ -36,11 +37,11 @@ public class UserController {
     }
 
     @PutMapping(path="/{id}")
-    public @ResponseBody String updateUser(@PathVariable int id,@RequestParam String name,@RequestParam String status, @RequestParam String location) {
+    public @ResponseBody String updateUser(@PathVariable int id,@RequestParam String name,@RequestParam String status, @RequestParam String local) {
         User n = userRepository.findById(id);
         n.setName(name);
         n.setStatus(status);
-        n.setLocation(location);
+        n.setLocal(local);
         userRepository.save(n);
         return "Atualizado ok";
     }

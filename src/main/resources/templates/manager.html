@@ -1,4 +1,10 @@
-<!DOCTYPE html>
+<!doctype html>
+<html lang="pt-br">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie-edge">
+  <meta name="author" content="Paulo Victor">
+  
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
     xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 
@@ -26,6 +32,10 @@
             endTime = document.getElementById("endTime").value;
             exitTime = document.getElementById("exitTime").value;
 
+            if (name == '') {
+                alert('O Nome do Paciente é obrigatório.');
+                return false;
+        }
 
             if (id > 0) {
                 xhttp.open("PUT", `/user/${id}?name=${name}&status=${status}&local=${local}&propsedTime=${propsedTime}&actualStartTime=${actualStartTime}&endTime=${endTime}&exitTime=${exitTime}`);
@@ -101,14 +111,12 @@
 
     <div class="container mt-3">
         <div class="row">
-            <!-- <div class="col">
-                    <img src="Bandeira_do_Distrito_Federal_Brasil.png" alt="HRT Logo" height = "100px">
-                </div>-->
+      
             <div>
-                <h2 class="col mt-1">Painel Centro Cirurgico - Hospital HRT<samp id="view"></samp></h2>
+                <h2 class="col mt-1"> Gerenciar Painel dos Pacientes no Centro Cirúrgico<samp id="view"></samp></h2>
             </div>
         </div>
-
+                        
         <form>
 
             <div class="row mb-3 mt-3">
@@ -123,8 +131,8 @@
                 <div class="col">
                     <label for="status">Status:</label>
                     <select class="form-select" id="status" name="status">
-                        <option value="Pré Operatório">Pré Operatório</option>
-                        <option value="Em sala de Cirurgia">Em sala de Cirurgia</option>
+                        <option value="Pré Operatório">Pré Operatório </option>
+                        <option value="Sala de Cirurgia">Sala de Cirurgia</option>
                         <option value="Sala de Recuperacao">Sala de Recuperação</option>
                         <option value="Transferído">Transferído</option>
                     </select>
@@ -158,14 +166,17 @@
                     </div>
                 </div>
 
+
                 <div>
                     <button type="button" class="btn btn-primary" onclick="save()">Salvar</button>
                     <button type="button" class="btn btn-secondary" onclick="clearForm()">Clear</button>
                     <button type="button" class="btn btn-danger" onclick="deleteUser()">Delete</button>
+                    
+                    <a href="/gerenciar" class="btn btn-success" role="button">Painel</a>
+    
                 </div>
-
             </div>
-
+            
         </form>
     </div>
     <div class="container mt-3">

@@ -9,16 +9,14 @@
 
 <body>
 
-  
+
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Sign Out" />
     </form>
 
     <p>
-		<img
-			src="Logo.png"
-			height="100px">
-	<!--	<script>
+        <img src="https://www.df.gov.br/wp-conteudo/uploads/2015/10/Bandeira_do_Distrito_Federal_Brasil.png" height="100px">
+        <!--	<script>
 			var myVar = setInterval(myTimer, 1000);
 			function myTimer() {
 				var d = new Date();
@@ -34,25 +32,26 @@
 	</p>-->
 
 
-</div>
-<div class="container mt-3">
-    <table class="table table-hover" style="cursor: pointer;">
-        <thead class="table-success">
-            <tr>
-                <th width= "40%"   >Name</th>
-                <th width= "30%" >Status</th>
-                <th width= "30%" >Location</th>
-                <th width= "20%" >Proposed Start Time</th>
-                <th width= "20%">Actual Start Time</th>
-                <th width= "20%">Surgery End Time</th>
-                <th width= "20%">Exit Time</th>
-            </tr>
-        </thead>
-        <tbody id="tbody">
+        </div>
+    <div class="container mt-3">
+        <table class="table table-hover" style="cursor: pointer;">
+            <thead class="table-success">
+                <tr>
+                    <th width="39%">Nome do Paciente</th>
+                    <th width="20%">Status</th>
+                    <th width="20%">Local</th>
+                    <th width="10%">Início Previsto</th>
+                    <th width="10%">Início Cirurgia</th>
+                    <th width="10%">Fim da Cirurgia</th>
+                    <th width="10%">Saída da Cirurgia</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
 
-        </tbody>
-    </table>
-</div>
-<script>listAllUser();</script>
+            </tbody>
+        </table>
+    </div>
+    <script>listAllUser();</script>
 </body>
+
 </html>

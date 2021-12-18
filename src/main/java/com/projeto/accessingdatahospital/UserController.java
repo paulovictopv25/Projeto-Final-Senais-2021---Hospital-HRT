@@ -12,43 +12,64 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-
-@Controller 
-@RequestMapping(path = "/user") 
+@Controller // Isso significa que esta classe é um controlador
+@RequestMapping(path = "/user") // Isso significa que os URLs começam com / user (após o caminho do aplicativo)
 @CrossOrigin(origins = "*")
 public class UserController {
-    @Autowired 
+
+    @Autowired // faz o star do nosso objeto
     private UserRepository userRepository;
 
     @PostMapping(path = "/") // Map ONLY POST Requests
-    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String status, @RequestParam String local) {
-        User n = new User();
-        n.setName(name);
-        n.setStatus(status);
-        n.setLocal(local);
+    public @ResponseBody String addNewUser(@RequestParam String name, @RequestParam String status, @RequestParam String local, @RequestParam String propsedTime, @RequestParam String actualStartTime, @RequestParam String endTime, @RequestParam String exitTime) {
 
-        userRepository.save(n);
-        return "Gravado Ok";
+        if (userRepository.findByName(name) != null) {
+            return "O nome digitado já existe.";
+        }
+
+        try {
+
+            User n = new User();
+            n.setName(name);
+            n.setStatus(status);
+            n.setLocal(local);
+            n.setPropsedTime(propsedTime);
+            n.setActualStartTime(actualStartTime);
+            n.setEndTime(endTime);
+            n.setExitTime(exitTime);
+            userRepository.save(n);
+            return "Ok ao gravar.";
+
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
     }
 
-    @GetMapping(path="/")
+    @GetMapping(path = "/")
     public @ResponseBody Iterable<User> getAllUsers() {
-      return userRepository.findAll();
+        return userRepository.findAll();
     }
 
-    @PutMapping(path="/{id}")
-    public @ResponseBody String updateUser(@PathVariable int id,@RequestParam String name,@RequestParam String status, @RequestParam String local) {
+    @PutMapping(path = "/{id}")
+    public @ResponseBody String updateUser(@PathVariable int id, @RequestParam String name, @RequestParam String status, @RequestParam String local, @RequestParam String propsedTime, @RequestParam String actualStartTime, @RequestParam String endTime, @RequestParam String exitTime) {
+       
         User n = userRepository.findById(id);
         n.setName(name);
         n.setStatus(status);
         n.setLocal(local);
+        n.setPropsedTime(propsedTime);
+        n.setActualStartTime(actualStartTime);
+        n.setEndTime(endTime);
+        n.setExitTime(exitTime);
         userRepository.save(n);
-        return "Atualizado ok";
+        return "Ok ao atualizar.";
     }
 
-    @DeleteMapping(path="/{id}")
+    @DeleteMapping(path = "/{id}")
     public @ResponseBody String deleteUser(@PathVariable int id) {
         userRepository.deleteById(id);
-        return "Deletado ok";
+        return "Ok ao apagar.";
     }
+
 }

@@ -26,6 +26,14 @@ body {
   border-radius: 5px;
 }
 
+.card-manager{
+  box-shadow: 1px 1px 5px rgb(5, 29, 13) ;
+  background-image: linear-gradient(to right, #8ee6c4f8 , #ced4eb4f);
+  padding: 30px;
+  border-radius: 5px;
+
+}
+
 .cardtop{
   text-align: center;
   width: 100%;
@@ -79,3 +87,4 @@ body {
   text-align: center;
 
 }
+

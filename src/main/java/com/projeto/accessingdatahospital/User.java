@@ -1,5 +1,7 @@
 package com.projeto.accessingdatahospital;
 
+//name="author": "Paulo Victor" //
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;

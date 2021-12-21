@@ -21,6 +21,7 @@
     </form>
 
     <script>
+
         lsUser = []
         function save() {
             const xhttp = new XMLHttpRequest();
@@ -52,19 +53,26 @@
                 clearForm();
             }
         }
-        function listAllUser() {
+         function listAllUser() {
 
-            const xhttp = new XMLHttpRequest();
+           const xhttp = new XMLHttpRequest();
             xhttp.open("GET", `/user/`);
             xhttp.send();
             xhttp.onload = function () {
                 lsUser = JSON.parse(this.responseText);
                 out = "";
                 for (const i in lsUser) {
-                    console.log(lsUser[i])
+                   // console.log(lsUser[i])
                     u = lsUser[i]
+                    try {
+                        cor = fStatus(u.status).cor  
+                        //console.log(fStatus(u.status).cor)
+                    } catch (error) {
+
+                    }
+
                     out += `<tr onclick='activate(${i})'><td>${u.name}</td>
-                                                         <td>${u.status}</td>
+                                                         <td style="background-color: ${cor}"> ${u.status}</td>
                                                          <td>${u.local}</td>
                                                          <td>${u.propsedTime}</td>
                                                          <td>${u.actualStartTime}</td>
@@ -107,6 +115,34 @@
                 listAllUser();
                 clearForm();
             }
+        }
+
+        function fStatus(status) {
+            console.log(status)
+            switch (status) {
+                case 'Pré Operatório':
+                    return {
+                        label: 'Pré-Operatório',
+                        cor: '#eff307'
+                    };
+                case 'Sala de Cirurgia':
+                    return {
+                        label: 'Sala de Cirurgia',
+                        cor: '#1648ec'
+                    };
+                case 'Sala de Recuperacao':
+                    return {
+                        label: 'Sala de Recuperacao',
+                        cor: '#ec1d16'
+                    };
+                case 'Transferído':
+                    return {
+                        label: 'Transferído',
+                        cor: '#16ec56'
+                    };
+            }
+
+
         }
 
     </script>
